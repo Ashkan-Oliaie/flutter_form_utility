@@ -30,7 +30,7 @@ class EmailValidation extends BaseValidator {
 class RequiredValidation extends BaseValidator {
   RequiredValidation({super.fieldName})
       : super(
-          errorMessage: 'This field is required',
+          errorMessage: 'field is required',
           validation: (value) => value.isNotEmpty,
         );
 }

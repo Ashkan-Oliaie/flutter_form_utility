@@ -25,5 +25,5 @@ abstract class BaseInput<T> {
 
   bool get isDisabled => _isDisabled;
 
-  void disable(bool status)=> _isDisabled = status;
+  void disable(bool status) => _isDisabled = status;
 }

@@ -8,11 +8,12 @@ mixin FormUtils<F extends BaseInput> {
 
   void registerField(F field) {
     _formFields[field.name] = field;
+    field.value = field.initialValue;
     field.validations = field.generateValidations?.call(_formFields) ?? [];
     if (field.isRequired) _formFields[field.name]?.validations.insert(0, RequiredValidation(fieldName: field.name));
   }
 
-  void unregisterField(String name)=>    _formFields.remove(name);
+  void unregisterField(String name) => _formFields.remove(name);
 
   void updateField(String key, value) {
     final field = _formFields[key];
@@ -21,7 +22,7 @@ mixin FormUtils<F extends BaseInput> {
     if (field?.hotErrorEnabled == true) field?.error = validateField(key);
   }
 
-  void disableField(String name,{bool status = false}) {
+  void disableField(String name, {bool status = false}) {
     final field = _formFields[name];
     field?.disable(status);
   }
@@ -46,7 +47,7 @@ mixin FormUtils<F extends BaseInput> {
 
   Map<String, F> validateAllFields() {
     _formFields.forEach((key, field) {
-      if(!field.isDisabled)_formFields[key]?.error = validateField(key);
+      if (!field.isDisabled) _formFields[key]?.error = validateField(key);
     });
     return _formFields;
   }
