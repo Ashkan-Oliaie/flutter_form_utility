@@ -1,7 +1,7 @@
 name: form_utility
 description: "This package helps to handle form logics with more ease."
-version: 0.0.1
-homepage:
+homepage: https://github.com/Ashkan-Oliaie/flutter_form_utility
+version: 0.0.2
 
 environment:
   sdk: '>=3.3.4 <4.0.0'
