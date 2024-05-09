@@ -1,7 +1,7 @@
 name: form_utility
 description: "Form Utility: A Dart package designed to simplify form logic handling. Ideal for Flutter developers seeking to streamline form validation and improve code readability."
 homepage: https://github.com/Ashkan-Oliaie/flutter_form_utility
-version: 0.0.4
+version: 0.0.5
 
 environment:
   sdk: '>=3.3.4 <4.0.0'
