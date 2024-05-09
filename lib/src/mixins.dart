@@ -1,20 +1,21 @@
 import 'package:form_utility/src/inputs/base_input.dart';
 import 'package:form_utility/src/validators/validators.dart';
 
+/// A mixin that provides utility methods for form management.
+///
+/// This mixin is intended to be used with classes that represent forms.
+/// It provides methods for registering and unregistering form fields,
+/// updating field values, disabling fields, validating individual fields,
+/// validating all fields, and retrieving error messages.
+///
+/// The type parameter `F` should be a subclass of `BaseInput`.
 mixin FormUtils<F extends BaseInput> {
   final Map<String, F> _formFields = {};
-
-  Map<String, F> get form => _formFields;
 
   void registerField(F field) {
     _formFields[field.name] = field;
     field.value = field.initialValue;
-    field.validations = field.generateValidations?.call(_formFields) ?? [];
-    if (field.isRequired) {
-      _formFields[field.name]
-          ?.validations
-          .insert(0, RequiredValidation(fieldName: field.name));
-    }
+    _setFieldValidators(field);
   }
 
   void unregisterField(String name) => _formFields.remove(name);
@@ -31,18 +32,20 @@ mixin FormUtils<F extends BaseInput> {
     field?.disable(status);
   }
 
-  dynamic getField(String key) {
-    return _formFields[key]?.value;
-  }
+  dynamic getValue(String key) => _formFields[key]?.value;
+
+  F? getField(String name) => _formFields[name];
 
   String? validateField(String key) {
     final field = _formFields[key];
     final value = field?.value;
-    final validations = field?.validations;
-    if (validations != null && value != null) {
-      for (var validation in validations) {
-        if (validation.validation?.call(value) == false) {
-          return validation.displayedError();
+    final validators = field?.validators ?? [];
+    for (var validator in validators) {
+      if (value == null) {
+        if (validator is RequiredValidator) return '${field?.name} is required';
+      } else {
+        if (validator.validation?.call(value) == false) {
+          return validator.displayedError;
         }
       }
     }
@@ -56,7 +59,14 @@ mixin FormUtils<F extends BaseInput> {
     return _formFields;
   }
 
-  Map<String, String?> getErrorMessages() {
-    return _formFields.map((key, field) => MapEntry(key, field.error));
+  Map<String, String?> getErrorMessages() =>
+      _formFields.map((key, field) => MapEntry(key, field.error));
+
+  void _setFieldValidators(F field) {
+    if (field.isRequired) {
+      field.validators.insert(0, RequiredValidator(fieldName: field.name));
+    }
+    final customValidators = field.generateCustomValidators?.call(_formFields);
+    field.addValidators([...?customValidators]);
   }
 }

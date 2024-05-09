@@ -4,8 +4,10 @@ class ChoiceInput<T> extends BaseInput<T> {
   ChoiceInput({
     required this.choices,
     required super.name,
+    required super.label,
     super.initialValue,
-    super.generateValidations,
+    super.generateCustomValidators,
+    super.validators,
     super.isRequired,
     super.hotErrorEnabled,
   });
