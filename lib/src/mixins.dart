@@ -10,7 +10,11 @@ mixin FormUtils<F extends BaseInput> {
     _formFields[field.name] = field;
     field.value = field.initialValue;
     field.validations = field.generateValidations?.call(_formFields) ?? [];
-    if (field.isRequired) _formFields[field.name]?.validations.insert(0, RequiredValidation(fieldName: field.name));
+    if (field.isRequired) {
+      _formFields[field.name]
+          ?.validations
+          .insert(0, RequiredValidation(fieldName: field.name));
+    }
   }
 
   void unregisterField(String name) => _formFields.remove(name);

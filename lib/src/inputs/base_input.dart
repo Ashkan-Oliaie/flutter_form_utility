@@ -21,7 +21,7 @@ abstract class BaseInput<T> {
   bool _isDisabled = false;
   bool hotErrorEnabled = false;
   String? error;
-  List<BaseValidator> validations = [];
+  List<BaseValidation> validations = [];
 
   bool get isDisabled => _isDisabled;
 
