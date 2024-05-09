@@ -9,4 +9,4 @@ To use this package, add `form_utility` as a [dependency in your pubspec.yaml fi
 
 ```yaml
 dependencies:
-  form_utility: ^0.0.3
+  form_utility: ^0.0.4

@@ -1,5 +1,5 @@
-class BaseValidator {
-  BaseValidator({
+class BaseValidation {
+  BaseValidation({
     required this.errorMessage,
     this.validation,
     this.fieldName,

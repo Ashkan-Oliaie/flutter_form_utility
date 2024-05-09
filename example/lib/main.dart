@@ -39,8 +39,19 @@ class _MyHomePageState extends State<MyHomePage> with FormUtils {
 
   @override
   void initState() {
-    registerField(TextInput(name: _emailKey, initialValue: '', hotErrorEnabled: true, isRequired: true, generateValidations: (_) => [EmailValidation()]));
-    registerField(TextInput(name: _passwordKey, initialValue: '', isRequired: true, hotErrorEnabled: true, generateValidations: (_) => [MinLengthValidation(6, fieldName: 'Password')]));
+    registerField(TextInput(
+        name: _emailKey,
+        initialValue: '',
+        hotErrorEnabled: true,
+        isRequired: true,
+        generateValidations: (_) => [EmailValidation()]));
+    registerField(TextInput(
+        name: _passwordKey,
+        initialValue: '',
+        isRequired: true,
+        hotErrorEnabled: true,
+        generateValidations: (_) =>
+            [MinLengthValidation(6, fieldName: 'Password')]));
     super.initState();
   }
 
@@ -81,7 +92,8 @@ class _MyHomePageState extends State<MyHomePage> with FormUtils {
                     _emailFieldErrorMessage = validateField(_emailKey);
                     _passwordFieldErrorMessage = validateField(_passwordKey);
                   });
-                  if (_emailFieldErrorMessage != null && _passwordFieldErrorMessage != null) {
+                  if (_emailFieldErrorMessage != null &&
+                      _passwordFieldErrorMessage != null) {
                     return;
                   } else {
                     //Submitting
