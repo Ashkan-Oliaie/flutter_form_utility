@@ -1,23 +1,23 @@
 import 'package:form_utility/src/validators/validators.dart';
 
-class MaxLengthValidation extends BaseValidation {
-  MaxLengthValidation(int maxLength, {super.fieldName})
+class MaxLengthValidator extends BaseValidator {
+  MaxLengthValidator(int maxLength, {super.fieldName})
       : super(
           errorMessage: 'max length is $maxLength',
           validation: (value) => value.length <= maxLength,
         );
 }
 
-class MinLengthValidation extends BaseValidation {
-  MinLengthValidation(int minLength, {super.fieldName})
+class MinLengthValidator extends BaseValidator {
+  MinLengthValidator(int minLength, {super.fieldName})
       : super(
           errorMessage: 'min length is $minLength',
           validation: (value) => value.length >= minLength,
         );
 }
 
-class EmailValidation extends BaseValidation {
-  EmailValidation({super.fieldName})
+class EmailValidator extends BaseValidator {
+  EmailValidator({super.fieldName})
       : super(
           errorMessage: 'Email address is not valid',
           validation: (value) {
@@ -28,20 +28,19 @@ class EmailValidation extends BaseValidation {
         );
 }
 
-class RequiredValidation extends BaseValidation {
-  RequiredValidation({super.fieldName})
+class RequiredValidator extends BaseValidator {
+  RequiredValidator({super.fieldName})
       : super(
           errorMessage: 'field is required',
           validation: (value) => value.isNotEmpty,
         );
 }
 
-class RegexValidation extends BaseValidation {
+class RegexValidator extends BaseValidator {
   final String regex;
 
-  RegexValidation(this.regex, {super.fieldName})
+  RegexValidator(this.regex, {super.fieldName, required super.errorMessage})
       : super(
-          errorMessage: "field doesn't match the pattern",
           validation: (value) => RegExp(regex).hasMatch(value),
         );
 }

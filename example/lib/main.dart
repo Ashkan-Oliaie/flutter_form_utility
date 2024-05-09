@@ -40,18 +40,19 @@ class _MyHomePageState extends State<MyHomePage> with FormUtils {
   @override
   void initState() {
     registerField(TextInput(
+        label: 'Email',
         name: _emailKey,
         initialValue: '',
-        hotErrorEnabled: true,
+        hotErrorEnabled: false,
         isRequired: true,
-        generateValidations: (_) => [EmailValidation()]));
+        validators: [EmailValidator()]));
     registerField(TextInput(
+        label: 'Password',
         name: _passwordKey,
         initialValue: '',
         isRequired: true,
         hotErrorEnabled: true,
-        generateValidations: (_) =>
-            [MinLengthValidation(6, fieldName: 'Password')]));
+        validators: [MinLengthValidator(6, fieldName: 'Password')]));
     super.initState();
   }
 
@@ -69,7 +70,9 @@ class _MyHomePageState extends State<MyHomePage> with FormUtils {
             SizedBox(
               width: 200,
               child: TextField(
-                onChanged: (text) => updateField(_emailKey, text),
+                onChanged: (text) {
+                  updateField(_emailKey, text);
+                },
                 decoration: InputDecoration(
                   errorText: _emailFieldErrorMessage,
                 ),
@@ -79,7 +82,12 @@ class _MyHomePageState extends State<MyHomePage> with FormUtils {
             SizedBox(
               width: 200,
               child: TextField(
-                onChanged: (text) => updateField(_passwordKey, text),
+                onChanged: (text) {
+                  updateField(_passwordKey, text);
+                  setState(() {
+                    _passwordFieldErrorMessage = getField(_passwordKey)?.error;
+                  });
+                },
                 decoration: InputDecoration(
                   errorText: _passwordFieldErrorMessage,
                 ),

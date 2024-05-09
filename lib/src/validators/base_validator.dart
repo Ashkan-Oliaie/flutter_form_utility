@@ -1,5 +1,5 @@
-class BaseValidation {
-  BaseValidation({
+class BaseValidator {
+  BaseValidator({
     required this.errorMessage,
     this.validation,
     this.fieldName,
@@ -8,7 +8,6 @@ class BaseValidation {
   final String? fieldName;
   final bool Function(String)? validation;
 
-  String displayedError() {
-    return fieldName != null ? '$fieldName $errorMessage' : errorMessage;
-  }
+  String get displayedError =>
+      fieldName != null ? '$fieldName $errorMessage' : errorMessage;
 }
