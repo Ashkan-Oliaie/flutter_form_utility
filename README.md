@@ -6,7 +6,3 @@
 ## Installation
 
 To use this package, add `form_utility` as a [dependency in your pubspec.yaml file](https://flutter.dev/docs/development/packages-and-plugins/using-packages).
-
-```yaml
-dependencies:
-  form_utility: ^0.0.5

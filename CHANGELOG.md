@@ -1,1 +1,3 @@
-## 0.0.5
+## 0.0.7
+
+#### Some abstractions have been added
