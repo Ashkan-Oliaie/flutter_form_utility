@@ -1,5 +1,5 @@
 library form_utility;
 
-export 'src/inputs/inputs.dart';
+export 'src/fields/fields.dart';
 export 'src/validators/validators.dart';
-export 'src/mixins.dart';
+export 'src/mixins/mixins.dart';

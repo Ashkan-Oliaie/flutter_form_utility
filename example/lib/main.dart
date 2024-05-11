@@ -30,7 +30,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with FormUtils {
+class _MyHomePageState extends State<MyHomePage> with FormUtility {
   static const String _emailKey = 'email';
   static const String _passwordKey = 'password';
 
@@ -39,17 +39,13 @@ class _MyHomePageState extends State<MyHomePage> with FormUtils {
 
   @override
   void initState() {
-    registerField(TextInput(
-        label: 'Email',
+    registerField(InputField(
         name: _emailKey,
-        initialValue: '',
         hotErrorEnabled: false,
         isRequired: true,
         validators: [EmailValidator()]));
-    registerField(TextInput(
-        label: 'Password',
+    registerField(InputField(
         name: _passwordKey,
-        initialValue: '',
         isRequired: true,
         hotErrorEnabled: true,
         validators: [MinLengthValidator(6, fieldName: 'Password')]));
@@ -85,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> with FormUtils {
                 onChanged: (text) {
                   updateField(_passwordKey, text);
                   setState(() {
-                    _passwordFieldErrorMessage = getField(_passwordKey)?.error;
+                    _passwordFieldErrorMessage = getField(_passwordKey).error;
                   });
                 },
                 decoration: InputDecoration(

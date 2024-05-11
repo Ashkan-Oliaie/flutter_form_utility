@@ -1,5 +1,8 @@
 import 'package:form_utility/src/validators/validators.dart';
 
+/// A class that represents a maximum length validator.
+///
+/// This class extends the [BaseValidator] class and is specifically designed to validate the maximum length of a string.
 class MaxLengthValidator extends BaseValidator {
   MaxLengthValidator(int maxLength, {super.fieldName})
       : super(
@@ -8,6 +11,9 @@ class MaxLengthValidator extends BaseValidator {
         );
 }
 
+/// A class that represents a minimum length validator.
+///
+/// This class extends the [BaseValidator] class and is specifically designed to validate the minimum length of a string.
 class MinLengthValidator extends BaseValidator {
   MinLengthValidator(int minLength, {super.fieldName})
       : super(
@@ -16,6 +22,9 @@ class MinLengthValidator extends BaseValidator {
         );
 }
 
+/// A class that represents an email validator.
+///
+/// This class extends the [BaseValidator] class and is specifically designed to validate email addresses.
 class EmailValidator extends BaseValidator {
   EmailValidator({super.fieldName})
       : super(
@@ -28,6 +37,9 @@ class EmailValidator extends BaseValidator {
         );
 }
 
+/// A class that represents a required field validator.
+///
+/// This class extends the [BaseValidator] class and is specifically designed to validate that a field is not empty.
 class RequiredValidator extends BaseValidator {
   RequiredValidator({super.fieldName})
       : super(
@@ -36,6 +48,9 @@ class RequiredValidator extends BaseValidator {
         );
 }
 
+/// A class that represents a regex validator.
+///
+/// This class extends the [BaseValidator] class and is specifically designed to validate a string against a regular expression.
 class RegexValidator extends BaseValidator {
   final String regex;
 
