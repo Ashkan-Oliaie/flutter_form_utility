@@ -16,16 +16,16 @@ abstract class IField<T> {
     required this.name,
     this.initialValue,
     this.generateCustomValidators,
-    this.validators = const [],
     this.isRequired = false,
     this.hotErrorEnabled = false,
-  });
+    List<BaseValidator>? validators,
+  }) : validators = validators ?? [];
 
   final String name;
   final T? initialValue;
   final GenerateValidationFunctionType generateCustomValidators;
   final bool isRequired;
-  List<BaseValidator> validators;
+  List<BaseValidator> validators = [];
   bool hotErrorEnabled = false;
 
   T? value;

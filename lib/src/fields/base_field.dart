@@ -11,7 +11,7 @@ class BaseField<T> extends IField<T> {
     required super.name,
     super.initialValue,
     super.generateCustomValidators,
-    super.validators = const [],
+    super.validators,
     super.isRequired = false,
     super.hotErrorEnabled = false,
   }) {
