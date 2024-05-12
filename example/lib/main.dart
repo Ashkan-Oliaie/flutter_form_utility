@@ -33,22 +33,42 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> with FormUtility {
   static const String _emailKey = 'email';
   static const String _passwordKey = 'password';
+  static const String _confirmPasswordKey = 'confirmPassword';
 
   String? _emailFieldErrorMessage;
   String? _passwordFieldErrorMessage;
+  String? _confirmPasswordFieldErrorMessage;
 
   @override
   void initState() {
-    registerField(InputField(
-        name: _emailKey,
-        hotErrorEnabled: false,
-        isRequired: true,
-        validators: [EmailValidator()]));
-    registerField(InputField(
-        name: _passwordKey,
-        isRequired: true,
-        hotErrorEnabled: true,
-        validators: [MinLengthValidator(6, fieldName: 'Password')]));
+    registerField(
+      InputField(
+          name: _emailKey,
+          hotErrorEnabled: false,
+          isRequired: true,
+          validators: [EmailValidator()]),
+    );
+    registerField(
+      InputField(
+          name: _passwordKey,
+          isRequired: true,
+          hotErrorEnabled: true,
+          validators: [MinLengthValidator(6, fieldName: 'Password')]),
+    );
+    registerField(
+      InputField(
+          name: _confirmPasswordKey,
+          isRequired: true,
+          hotErrorEnabled: true,
+          generateCustomValidators: (fields) {
+            return [
+              BaseValidator(
+                errorMessage: 'Passwords do not match',
+                validation: (value) => value == fields[_passwordKey]?.value,
+              ),
+            ];
+          }),
+    );
     super.initState();
   }
 
@@ -71,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> with FormUtility {
                 },
                 decoration: InputDecoration(
                   errorText: _emailFieldErrorMessage,
+                  label: const Text('Email'),
                 ),
               ),
             ),
@@ -86,6 +107,24 @@ class _MyHomePageState extends State<MyHomePage> with FormUtility {
                 },
                 decoration: InputDecoration(
                   errorText: _passwordFieldErrorMessage,
+                  label: const Text('Password'),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: 200,
+              child: TextField(
+                onChanged: (text) {
+                  updateField(_confirmPasswordKey, text);
+                  setState(() {
+                    _confirmPasswordFieldErrorMessage =
+                        getField(_confirmPasswordKey).error;
+                  });
+                },
+                decoration: InputDecoration(
+                  errorText: _confirmPasswordFieldErrorMessage,
+                  label: const Text('Confirm Password'),
                 ),
               ),
             ),

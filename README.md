@@ -6,3 +6,59 @@
 ## Installation
 
 To use this package, add `form_utility` as a [dependency in your pubspec.yaml file](https://flutter.dev/docs/development/packages-and-plugins/using-packages).
+
+
+## Usage
+To use this package, first of all you add the `FormUtility` to where you need the functionalities. 
+
+Then you can register your fields and validations with the `FormUtility` mixin. The `FormUtility` mixin provides methods for registering fields and validations, as well as for validating the form and accessing the form data.
+
+```dart
+registerField(
+  InputField(
+    name: 'EmailFieldKey',
+    isRequired: true,
+    validators: [EmailValidator()],
+  ),
+);
+```
+Now you have control over the fields, and you can validate them however you want.
+
+You can even benefit from cross-field validation.
+
+```dart
+registerField(
+  InputField(
+    name: 'ConfirmPasswordKey',
+    generateCustomValidators: (formValues) {
+      return [
+        BaseValidator(
+          errorMessage: 'Passwords do not match',
+          validation: (value) => value == fields['PasswordKey']?.value,
+        ),
+      ];
+    },
+  ),
+);
+```
+
+You can use the predefined validators or create your own extending `BaseValidator`.
+
+```dart
+class CustomValidator extends BaseValidator {
+  ExactLengthValidator() : super(
+    errorMessage: 'your error message',
+    validation: (value) => 'your validation logic',
+  );
+}
+```
+
+## Future plans
+
+- [ ] Introduce more abstraction to allow better extendability and customization
+- [ ] Implement dynamic custom inputs
+- [ ] Implement predefined validators
+- [ ] Implement extra frequently used fields
+- [ ] Integrate into the UI
+- [ ] Implement predefined UI components
+- [ ] Introduce forms grouping
