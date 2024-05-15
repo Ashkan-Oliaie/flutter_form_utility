@@ -43,6 +43,9 @@ class BaseField<T> extends IField<T> {
   void validateField() {
     error = null;
     for (var validator in validators) {
+      if ((value == null || value?.toString().isEmpty == true) && !isRequired) {
+        continue;
+      }
       if (!validator.isValid(value)) error ??= validator.displayedError;
     }
   }

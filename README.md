@@ -53,6 +53,11 @@ class CustomValidator extends BaseValidator {
 }
 ```
 
+The form can now get validated by calling the `validateForm` method. If you needed hot validation on a field, you need to register the field with 'hotErrorEnabled' set to true.
+
+The error messaged are returned by the `validateForm` method. The `validateField` could also be used to validate a single field.
+
+
 ## Future plans
 
 - [ ] Introduce more abstraction to allow better extendability and customization
